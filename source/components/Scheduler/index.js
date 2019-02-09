@@ -1,16 +1,45 @@
 // Core
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
 // Instruments
 import Styles from './styles.m.css';
-import { tasks } from './tasks';
+import { tasksActions } from '../../bus/tasks/actions';
 
 // Components
 import Task from '../Task';
+import Spinner from '../Spinner';
 import Checkbox from '../../theme/assets/Checkbox';
 
+const mapStateToProps = (state) => {
+    return {
+        tasks: state.tasks,
+
+    };
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        actions: bindActionCreators({
+            fetchTasksAsync: tasksActions.fetchTasksAsync,
+        }, dispatch),
+    };
+};
+
+@connect(
+    mapStateToProps,
+    mapDispatchToProps
+)
 export default class Scheduler extends Component {
+    componentDidMount () {
+        const { actions } = this.props;
+
+        actions.fetchTasksAsync();
+    }
     render () {
+        const { actions, tasks } = this.props;
+
         const todoList = tasks.map((task) => (
             <Task
                 completed = { task.completed }
