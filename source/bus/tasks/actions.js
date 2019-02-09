@@ -3,10 +3,10 @@ import { types } from './types';
 
 export const tasksActions = {
     //Sync
-    fillTasks: (posts) => {
+    fillTasks: (tasks) => {
         return {
             type:    types.FILL_TASKS,
-            payload: posts,
+            payload: tasks,
         };
     },
 
