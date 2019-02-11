@@ -15,6 +15,12 @@ export const tasksActions = {
             payload: message,
         };
     },
+    removeTask: (taskId) => {
+        return {
+            type:    types.REMOVE_TASK,
+            payload: taskId,
+        };
+    },
 
     //Async
     fetchTasksAsync: () => {
@@ -26,6 +32,12 @@ export const tasksActions = {
         return {
             type:    types.CREATE_TASK_ASYNC,
             payload: message,
+        };
+    },
+    removeTaskAsync: (taskId) => {
+        return {
+            type:    types.REMOVE_TASK_ASYNC,
+            payload: taskId,
         };
     },
 };
