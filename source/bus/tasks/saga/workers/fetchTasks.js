@@ -4,10 +4,11 @@ import { put, apply } from 'redux-saga/effects';
 //Instruments
 import { api } from '../../../../REST';
 import { tasksActions } from '../../actions';
+import { uiActions } from '../../../ui/actions';
 
 export function* fetchTasks () {
     try {
-        //yield put(uiActions.startFetching());
+        yield put(uiActions.startSpinning());
         const response = yield apply(api, api.tasks.fetch);
         const { data: tasks, errorMessage } = yield apply(response, response.json);
 
@@ -17,9 +18,8 @@ export function* fetchTasks () {
 
         yield put(tasksActions.fillTasks(tasks));
     } catch (error) {
-        console.log('fetchTasks worker error');
-        //yield put(uiActions.emitError(error, 'fetchTasks worker'));
+        yield put(uiActions.emitError(error, 'fetchTasks worker'));
     } finally {
-        //yield put(uiActions.stopFetching());
+        yield put(uiActions.stopSpinning());
     }
 }

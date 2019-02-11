@@ -4,10 +4,11 @@ import { put, apply } from 'redux-saga/effects';
 //Instruments
 import { api } from '../../../../REST';
 import { tasksActions } from '../../actions';
+import { uiActions } from '../../../ui/actions';
 
 export function* removeTask ({ payload: taskId }) {
     try {
-        //yield put(uiActions.startFetching());
+        yield put(uiActions.startSpinning());
         const response = yield apply(api, api.tasks.remove, [taskId]);
 
         if (response.status !== 204) {
@@ -18,9 +19,8 @@ export function* removeTask ({ payload: taskId }) {
 
         yield put(tasksActions.removeTask(taskId));
     } catch (error) {
-        console.log('removeTask worker error');
-        //yield put(uiActions.emitError(error, 'fetchTasks worker'));
+        yield put(uiActions.emitError(error, 'removeTask worker'));
     } finally {
-        //yield put(uiActions.stopFetching());
+        yield put(uiActions.stopSpinning());
     }
 }
