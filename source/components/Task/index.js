@@ -15,6 +15,12 @@ export default class Task extends PureComponent {
 
     taskInput = createRef();
 
+    _removeTask = () => {
+        const { actions, id } = this.props;
+
+        actions.removeTaskAsync(id);
+    };
+
     render () {
         const { message, completed } = this.props;
 
@@ -58,6 +64,7 @@ export default class Task extends PureComponent {
                         className = { Styles.removeTask }
                         color1 = '#3B8EF3'
                         color2 = '#000'
+                        onClick = { this._removeTask }
                     />
                 </div>
             </li>
