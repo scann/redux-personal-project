@@ -25,6 +25,7 @@ const mapDispatchToProps = (dispatch) => {
         actions: bindActionCreators({
             fetchTasksAsync: tasksActions.fetchTasksAsync,
             createTaskAsync: tasksActions.createTaskAsync,
+            removeTaskAsync: tasksActions.removeTaskAsync,
         }, dispatch),
     };
 };
@@ -52,6 +53,7 @@ export default class Scheduler extends Component {
 
         const todoList = tasks.map((task) => (
             <Task
+                actions = { actions }
                 completed = { task.get('completed') }
                 favorite = { task.get('favorite') }
                 id = { task.get('id') }
