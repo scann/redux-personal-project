@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { Form, Control } from 'react-redux-form';
 
 // Instruments
 import Styles from './styles.m.css';
@@ -23,6 +24,7 @@ const mapDispatchToProps = (dispatch) => {
     return {
         actions: bindActionCreators({
             fetchTasksAsync: tasksActions.fetchTasksAsync,
+            createTaskAsync: tasksActions.createTaskAsync,
         }, dispatch),
     };
 };
@@ -37,16 +39,24 @@ export default class Scheduler extends Component {
 
         actions.fetchTasksAsync();
     }
+
+    _createTask = ({ newTaskMessage }) => {
+        if (!newTaskMessage) {
+            return null;
+        }
+        this.props.actions.createTaskAsync(newTaskMessage);
+    };
+
     render () {
         const { actions, tasks } = this.props;
 
         const todoList = tasks.map((task) => (
             <Task
-                completed = { task.completed }
-                favorite = { task.favorite }
-                id = { task.id }
-                key = { task.id }
-                message = { task.message }
+                completed = { task.get('completed') }
+                favorite = { task.get('favorite') }
+                id = { task.get('id') }
+                key = { task.get('id') }
+                message = { task.get('message') }
                 { ...task }
             />
         ));
@@ -59,15 +69,15 @@ export default class Scheduler extends Component {
                         <input placeholder = 'Поиск' type = 'search' />
                     </header>
                     <section>
-                        <form>
-                            <input
+                        <Form model = 'form.scheduler' onSubmit = { this._createTask }>
+                            <Control.text model = 'form.scheduler.newTaskMessage'
                                 className = { Styles.createTask }
                                 maxLength = { 50 }
                                 placeholder = 'Описание моей новой задачи'
                                 type = 'text'
                             />
                             <button>Добавить задачу</button>
-                        </form>
+                        </Form>
                         <div className = { Styles.overlay }>
                             <ul>{todoList}</ul>
                         </div>
