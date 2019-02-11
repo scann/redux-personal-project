@@ -1,5 +1,5 @@
 // Core
-import React, { PureComponent } from 'react';
+import React, { PureComponent, createRef } from 'react';
 import cx from 'classnames';
 
 // Instruments
@@ -12,6 +12,9 @@ import Edit from '../../theme/assets/Edit';
 import Star from '../../theme/assets/Star';
 
 export default class Task extends PureComponent {
+
+    taskInput = createRef();
+
     render () {
         const { message, completed } = this.props;
 
@@ -28,7 +31,12 @@ export default class Task extends PureComponent {
                         color1 = '#3B8EF3'
                         color2 = '#FFF'
                     />
-                    <input disabled type = 'text' value = { message } />
+                    <input
+                        disabled
+                        ref = { this.taskInput }
+                        type = 'text'
+                        value = { message }
+                    />
                 </div>
                 <div className = { Styles.actions }>
                     <Star
