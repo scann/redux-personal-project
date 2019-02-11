@@ -16,7 +16,7 @@ import Checkbox from '../../theme/assets/Checkbox';
 const mapStateToProps = (state) => {
     return {
         tasks: state.tasks,
-
+        isTasksFetching: state.ui.get('isTasksFetching'),
     };
 };
 
@@ -49,7 +49,7 @@ export default class Scheduler extends Component {
     };
 
     render () {
-        const { actions, tasks } = this.props;
+        const { actions, tasks, isTasksFetching } = this.props;
 
         const todoList = tasks.map((task) => (
             <Task
@@ -66,6 +66,7 @@ export default class Scheduler extends Component {
         return (
             <section className = { Styles.scheduler }>
                 <main>
+                    <Spinner isSpinning = { isTasksFetching }/>
                     <header>
                         <h1>Планировщик задач</h1>
                         <input placeholder = 'Поиск' type = 'search' />
