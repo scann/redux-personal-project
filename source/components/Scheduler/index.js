@@ -13,10 +13,15 @@ import Task from '../Task';
 import Spinner from '../Spinner';
 import Checkbox from '../../theme/assets/Checkbox';
 
+//Instruments
+import { sortTasksByGroup } from '../../instruments';
+import {uiActions} from '../../bus/ui/actions';
+
 const mapStateToProps = (state) => {
     return {
-        tasks: state.tasks,
+        tasks: sortTasksByGroup(state.tasks),
         isTasksFetching: state.ui.get('isTasksFetching'),
+        tasksFilter: state.ui.get('tasksFilter'),
     };
 };
 
@@ -26,6 +31,7 @@ const mapDispatchToProps = (dispatch) => {
             fetchTasksAsync: tasksActions.fetchTasksAsync,
             createTaskAsync: tasksActions.createTaskAsync,
             removeTaskAsync: tasksActions.removeTaskAsync,
+            updateTasksFilter: uiActions.updateTasksFilter,
         }, dispatch),
     };
 };
@@ -48,10 +54,17 @@ export default class Scheduler extends Component {
         this.props.actions.createTaskAsync(newTaskMessage);
     };
 
-    render () {
-        const { actions, tasks, isTasksFetching } = this.props;
+    _updateTasksFilter = (event) => {
+        this.props.actions.updateTasksFilter(event.target.value.toLowerCase());
+    };
 
-        const todoList = tasks.map((task) => (
+    render () {
+        const { actions, tasks, isTasksFetching, tasksFilter } = this.props;
+
+        const todoList = tasks
+            .filter((task) =>
+                task.get('message').toLowerCase().includes(tasksFilter))
+            .map((task) => (
             <Task
                 actions = { actions }
                 completed = { task.get('completed') }
@@ -69,7 +82,11 @@ export default class Scheduler extends Component {
                     <Spinner isSpinning = { isTasksFetching }/>
                     <header>
                         <h1>Планировщик задач</h1>
-                        <input placeholder = 'Поиск' type = 'search' />
+                        <input
+                            placeholder = 'Поиск'
+                            type = 'search'
+                            value = { tasksFilter }
+                            onChange = { this._updateTasksFilter }/>
                     </header>
                     <section>
                         <Form model = 'form.scheduler' onSubmit = { this._createTask }>
