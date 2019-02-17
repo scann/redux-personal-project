@@ -20,4 +20,10 @@ export const uiActions = {
             meta,
         };
     },
+    updateTasksFilter: (filter) => {
+        return {
+            type:    types.UPDATE_TASKS_FILTER,
+            payload: filter,
+        };
+    },
 };
