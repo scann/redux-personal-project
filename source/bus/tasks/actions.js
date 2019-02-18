@@ -21,6 +21,11 @@ export const tasksActions = {
             payload: taskId,
         };
     },
+    completeAllTasks: () => {
+        return {
+            type: types.COMPLETE_ALL_TASKS,
+        };
+    },
 
     //Async
     fetchTasksAsync: () => {
@@ -38,6 +43,11 @@ export const tasksActions = {
         return {
             type:    types.REMOVE_TASK_ASYNC,
             payload: taskId,
+        };
+    },
+    completeAllTasksAsync: () => {
+        return {
+            type: types.COMPLETE_ALL_TASKS_ASYNC,
         };
     },
 };

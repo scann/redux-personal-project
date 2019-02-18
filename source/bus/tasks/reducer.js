@@ -19,6 +19,10 @@ export const tasksReducer = (state = initialState, action) => {
 
             return state.filter((task) => task.get('id') !== taskId);
 
+        case types.COMPLETE_ALL_TASKS:
+
+            return state.map((task) => task.set('completed', true));
+
         default:
             return state;
     }
