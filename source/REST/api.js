@@ -29,5 +29,15 @@ export const api = {
                 },
             });
         },
+        complete (task) {
+            return fetch(MAIN_URL, {
+                method:  'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization:  TOKEN,
+                },
+                body: JSON.stringify([task]),
+            });
+        },
     },
 };
