@@ -15,7 +15,7 @@ import Checkbox from '../../theme/assets/Checkbox';
 
 //Instruments
 import { sortTasksByGroup } from '../../instruments';
-import {uiActions} from '../../bus/ui/actions';
+import { uiActions } from '../../bus/ui/actions';
 
 const mapStateToProps = (state) => {
     return {
@@ -31,6 +31,7 @@ const mapDispatchToProps = (dispatch) => {
             fetchTasksAsync: tasksActions.fetchTasksAsync,
             createTaskAsync: tasksActions.createTaskAsync,
             removeTaskAsync: tasksActions.removeTaskAsync,
+            completeAllTasksAsync: tasksActions.completeAllTasksAsync,
             updateTasksFilter: uiActions.updateTasksFilter,
         }, dispatch),
     };
@@ -47,6 +48,8 @@ export default class Scheduler extends Component {
         actions.fetchTasksAsync();
     }
 
+    _getAllCompleted = () => this.props.tasks.every((task) => task.get('completed'));
+
     _createTask = ({ newTaskMessage }) => {
         if (!newTaskMessage) {
             return null;
@@ -61,6 +64,7 @@ export default class Scheduler extends Component {
     render () {
         const { actions, tasks, isTasksFetching, tasksFilter } = this.props;
 
+        const allTasksCompleted = this._getAllCompleted();
         const todoList = tasks
             .filter((task) =>
                 task.get('message').toLowerCase().includes(tasksFilter))
@@ -103,7 +107,11 @@ export default class Scheduler extends Component {
                         </div>
                     </section>
                     <footer>
-                        <Checkbox checked color1 = '#363636' color2 = '#fff' />
+                        <Checkbox checked = { allTasksCompleted }
+                                  color1 = '#363636'
+                                  color2 = '#fff'
+                                  onClick = { !allTasksCompleted && actions.completeAllTasksAsync }
+                        />
                         <span className = { Styles.completeAllTasks }>
                             Все задачи выполнены
                         </span>
