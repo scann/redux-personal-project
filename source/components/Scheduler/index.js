@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Form, Control } from 'react-redux-form';
+import FlipMove from 'react-flip-move';
 
 // Instruments
 import Styles from './styles.m.css';
@@ -119,7 +120,32 @@ export default class Scheduler extends Component {
                             <button>Добавить задачу</button>
                         </Form>
                         <div className = { Styles.overlay }>
-                            <ul>{todoList}</ul>
+                            <div>
+                                <ul>
+                                    <FlipMove
+                                        enterAnimation = { {
+                                            from: {
+                                                transform: 'rotateX(180deg)',
+                                                opacity:   0.1,
+                                            },
+                                            to: {
+                                                transform: '',
+                                            },
+                                        } }
+                                        leaveAnimation = { {
+                                            from: {
+                                                transform: '',
+                                            },
+                                            to: {
+                                                transform: 'rotateX(-120deg)',
+                                                opacity:   0.1,
+                                            },
+                                        } }
+                                        staggerDelayBy = { 100 }>
+                                        { todoList }
+                                    </FlipMove>
+                                </ul>
+                            </div>
                         </div>
                     </section>
                     <footer>
