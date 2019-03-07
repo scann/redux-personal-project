@@ -26,4 +26,33 @@ export const uiActions = {
             payload: filter,
         };
     },
+    startEditingTask: (id, message) => {
+        return {
+            type:    types.START_EDITING_TASK,
+            payload: {
+                id,
+                message,
+            },
+        };
+    },
+    resetEditingTask: () => {
+        return {
+            type: types.RESET_EDITING_TASK,
+        };
+    },
+    confirmEditingTask: (taskId, message) => {
+        return {
+            type:    types.CONFIRM_EDITING_TASK,
+            payload: {
+                taskId,
+                message,
+            },
+        };
+    },
+    updateTaskMessage: (message) => {
+        return {
+            type:    types.UPDATE_TASK_MESSAGE,
+            payload: message,
+        };
+    },
 };
