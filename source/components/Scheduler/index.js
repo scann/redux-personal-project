@@ -7,32 +7,41 @@ import { Form, Control } from 'react-redux-form';
 // Instruments
 import Styles from './styles.m.css';
 import { tasksActions } from '../../bus/tasks/actions';
+import { uiActions } from '../../bus/ui/actions';
+import { sortTasksByGroup } from '../../instruments';
+import { createSelector } from 'reselect';
 
 // Components
 import Task from '../Task';
 import Spinner from '../Spinner';
 import Checkbox from '../../theme/assets/Checkbox';
 
-//Instruments
-import { sortTasksByGroup } from '../../instruments';
-import { uiActions } from '../../bus/ui/actions';
+const getTasks = (state) => state.tasks;
+
+const sortedTasks = createSelector(getTasks, (tasks) => sortTasksByGroup(tasks));
 
 const mapStateToProps = (state) => {
     return {
-        tasks: sortTasksByGroup(state.tasks),
+        tasks: sortedTasks(state),
         isTasksFetching: state.ui.get('isTasksFetching'),
         tasksFilter: state.ui.get('tasksFilter'),
+        editTask: state.ui.get('editTask'),
     };
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
         actions: bindActionCreators({
-            fetchTasksAsync: tasksActions.fetchTasksAsync,
-            createTaskAsync: tasksActions.createTaskAsync,
-            removeTaskAsync: tasksActions.removeTaskAsync,
-            completeAllTasksAsync: tasksActions.completeAllTasksAsync,
-            updateTasksFilter: uiActions.updateTasksFilter,
+            fetchTasksAsync:        tasksActions.fetchTasksAsync,
+            createTaskAsync:        tasksActions.createTaskAsync,
+            removeTaskAsync:        tasksActions.removeTaskAsync,
+            completeAllTasksAsync:  tasksActions.completeAllTasksAsync,
+            updateTaskAsync:        tasksActions.updateTaskAsync,
+            updateTasksFilter:      uiActions.updateTasksFilter,
+            startEditingTask:       uiActions.startEditingTask,
+            resetEditingTask:       uiActions.resetEditingTask,
+            updateTaskMessage:      uiActions.updateTaskMessage,
+            confirmEditingTask:     uiActions.confirmEditingTask,
         }, dispatch),
     };
 };
@@ -62,20 +71,27 @@ export default class Scheduler extends Component {
     };
 
     render () {
-        const { actions, tasks, isTasksFetching, tasksFilter } = this.props;
+        const { actions, tasks, isTasksFetching, tasksFilter, editTask } = this.props;
 
         const allTasksCompleted = this._getAllCompleted();
+
         const todoList = tasks
             .filter((task) =>
                 task.get('message').toLowerCase().includes(tasksFilter))
             .map((task) => (
             <Task
-                actions = { actions }
                 completed = { task.get('completed') }
+                confirmEditingTask = { actions.confirmEditingTask }
+                editTask = { editTask }
                 favorite = { task.get('favorite') }
                 id = { task.get('id') }
                 key = { task.get('id') }
                 message = { task.get('message') }
+                removeTaskAsync = { actions.removeTaskAsync }
+                resetEditingTask = { actions.resetEditingTask }
+                startEditingTask = { actions.startEditingTask }
+                updateTaskAsync = { actions.updateTaskAsync }
+                updateTaskMessage = { actions.updateTaskMessage }
                 { ...task }
             />
         ));
