@@ -1,0 +1,62 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ui actions: confirmEditingTask 1`] = `
+Object {
+  "payload": Object {
+    "message": "TEST_MESSAGE",
+    "taskId": "TEST_ID",
+  },
+  "type": "CONFIRM_EDITING_TASK",
+}
+`;
+
+exports[`ui actions: emitError 1`] = `
+Object {
+  "error": true,
+  "meta": null,
+  "payload": [Error: TEST_ERROR_MESSAGE.],
+  "type": "EMIT_ERROR",
+}
+`;
+
+exports[`ui actions: resetEditingTask 1`] = `
+Object {
+  "type": "RESET_EDITING_TASK",
+}
+`;
+
+exports[`ui actions: startEditingTask 1`] = `
+Object {
+  "payload": Object {
+    "id": "TEST_ID",
+    "message": "TEST_MESSAGE",
+  },
+  "type": "START_EDITING_TASK",
+}
+`;
+
+exports[`ui actions: startSpinning 1`] = `
+Object {
+  "type": "START_SPINNING",
+}
+`;
+
+exports[`ui actions: stopSpinning 1`] = `
+Object {
+  "type": "STOP_SPINNING",
+}
+`;
+
+exports[`ui actions: updateTaskMessage 1`] = `
+Object {
+  "payload": "TEST_MESSAGE",
+  "type": "UPDATE_TASK_MESSAGE",
+}
+`;
+
+exports[`ui actions: updateTasksFilter 1`] = `
+Object {
+  "payload": "FILTER_STRING",
+  "type": "UPDATE_TASKS_FILTER",
+}
+`;
