@@ -1,0 +1,89 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`tasks actions: completeAllTasks 1`] = `
+Object {
+  "type": "COMPLETE_ALL_TASKS",
+}
+`;
+
+exports[`tasks actions: completeAllTasksAsync 1`] = `
+Object {
+  "type": "COMPLETE_ALL_TASKS_ASYNC",
+}
+`;
+
+exports[`tasks actions: createTask 1`] = `
+Object {
+  "payload": "TEST_MESSAGE",
+  "type": "CREATE_TASK",
+}
+`;
+
+exports[`tasks actions: createTaskAsync 1`] = `
+Object {
+  "payload": "TEST_MESSAGE",
+  "type": "CREATE_TASK_ASYNC",
+}
+`;
+
+exports[`tasks actions: fetchTasksAsync 1`] = `
+Object {
+  "type": "FETCH_TASKS_ASYNC",
+}
+`;
+
+exports[`tasks actions: fillTasks 1`] = `
+Object {
+  "payload": Object {
+    "tasks": Array [
+      Object {
+        "completed": true,
+        "favorite": true,
+        "id": "TEST_ID1",
+        "message": "TEST_MESSAGE1",
+      },
+      Object {
+        "completed": false,
+        "favorite": false,
+        "id": "TEST_ID2",
+        "message": "TEST_MESSAGE2",
+      },
+    ],
+  },
+  "type": "FILL_TASKS",
+}
+`;
+
+exports[`tasks actions: removeTask 1`] = `
+Object {
+  "payload": "TEST_ID",
+  "type": "REMOVE_TASK",
+}
+`;
+
+exports[`tasks actions: removeTaskAsync 1`] = `
+Object {
+  "payload": "TEST_ID",
+  "type": "REMOVE_TASK_ASYNC",
+}
+`;
+
+exports[`tasks actions: updateTask 1`] = `
+Object {
+  "payload": Object {
+    "id": "TEST_ID",
+    "message": "TEST_MESSAGE",
+  },
+  "type": "UPDATE_TASK",
+}
+`;
+
+exports[`tasks actions: updateTaskAsync 1`] = `
+Object {
+  "payload": Object {
+    "id": "TEST_ID",
+    "message": "TEST_MESSAGE",
+  },
+  "type": "UPDATE_TASK_ASYNC",
+}
+`;
