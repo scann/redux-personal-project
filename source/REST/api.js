@@ -15,8 +15,8 @@ export const api = {
             return fetch(`${MAIN_URL}`, {
                 method:  'POST',
                 headers: {
-                    Authorization:  TOKEN,
                     'Content-Type': 'application/json',
+                    Authorization:  TOKEN,
                 },
                 body: JSON.stringify({ message }),
             });
@@ -30,6 +30,16 @@ export const api = {
             });
         },
         complete (task) {
+            return fetch(MAIN_URL, {
+                method:  'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization:  TOKEN,
+                },
+                body: JSON.stringify([task]),
+            });
+        },
+        update (task) {
             return fetch(MAIN_URL, {
                 method:  'PUT',
                 headers: {
