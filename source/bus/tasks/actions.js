@@ -26,6 +26,12 @@ export const tasksActions = {
             type: types.COMPLETE_ALL_TASKS,
         };
     },
+    updateTask: (updatedTask) => {
+        return {
+            type:    types.UPDATE_TASK,
+            payload: updatedTask,
+        };
+    },
 
     //Async
     fetchTasksAsync: () => {
@@ -48,6 +54,12 @@ export const tasksActions = {
     completeAllTasksAsync: () => {
         return {
             type: types.COMPLETE_ALL_TASKS_ASYNC,
+        };
+    },
+    updateTaskAsync: (updatedTask) => {
+        return {
+            type:    types.UPDATE_TASK_ASYNC,
+            payload: updatedTask,
         };
     },
 };

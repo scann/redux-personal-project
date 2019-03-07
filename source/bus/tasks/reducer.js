@@ -23,6 +23,13 @@ export const tasksReducer = (state = initialState, action) => {
 
             return state.map((task) => task.set('completed', true));
 
+        case types.UPDATE_TASK:
+            return state.update(
+                state.findIndex(
+                    (task) => task.get('id') === action.payload.id),
+                () => fromJS(action.payload)
+            );
+
         default:
             return state;
     }
