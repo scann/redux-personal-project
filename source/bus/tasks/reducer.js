@@ -25,8 +25,7 @@ export const tasksReducer = (state = initialState, action) => {
 
         case types.UPDATE_TASK:
             return state.update(
-                state.findIndex(
-                    (task) => task.get('id') === action.payload.id),
+                state.findIndex((task) => task.get('id') === action.payload.id),
                 () => fromJS(action.payload)
             );
 
