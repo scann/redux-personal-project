@@ -1,0 +1,113 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`form reducer should return initial state by default 1`] = `
+Object {
+  "forms": Object {
+    "$form": Object {
+      "errors": Object {},
+      "focus": false,
+      "initialValue": Object {
+        "scheduler": Object {
+          "initialFormState": Object {
+            "newTaskMessage": "",
+          },
+        },
+      },
+      "intents": Array [],
+      "model": "form",
+      "pending": false,
+      "pristine": true,
+      "retouched": false,
+      "submitFailed": false,
+      "submitted": false,
+      "touched": false,
+      "valid": true,
+      "validated": false,
+      "validating": false,
+      "validity": Object {},
+      "value": Object {
+        "scheduler": Object {
+          "initialFormState": Object {
+            "newTaskMessage": "",
+          },
+        },
+      },
+    },
+    "scheduler": Object {
+      "$form": Object {
+        "errors": Object {},
+        "focus": false,
+        "initialValue": Object {
+          "initialFormState": Object {
+            "newTaskMessage": "",
+          },
+        },
+        "intents": Array [],
+        "model": "form.scheduler",
+        "pending": false,
+        "pristine": true,
+        "retouched": false,
+        "submitFailed": false,
+        "submitted": false,
+        "touched": false,
+        "valid": true,
+        "validated": false,
+        "validating": false,
+        "validity": Object {},
+        "value": Object {
+          "initialFormState": Object {
+            "newTaskMessage": "",
+          },
+        },
+      },
+      "initialFormState": Object {
+        "$form": Object {
+          "errors": Object {},
+          "focus": false,
+          "initialValue": Object {
+            "newTaskMessage": "",
+          },
+          "intents": Array [],
+          "model": "form.scheduler.initialFormState",
+          "pending": false,
+          "pristine": true,
+          "retouched": false,
+          "submitFailed": false,
+          "submitted": false,
+          "touched": false,
+          "valid": true,
+          "validated": false,
+          "validating": false,
+          "validity": Object {},
+          "value": Object {
+            "newTaskMessage": "",
+          },
+        },
+        "newTaskMessage": Object {
+          "errors": Object {},
+          "focus": false,
+          "initialValue": "",
+          "intents": Array [],
+          "model": "form.scheduler.initialFormState.newTaskMessage",
+          "pending": false,
+          "pristine": true,
+          "retouched": false,
+          "submitFailed": false,
+          "submitted": false,
+          "touched": false,
+          "valid": true,
+          "validated": false,
+          "validating": false,
+          "validity": Object {},
+          "value": "",
+        },
+      },
+    },
+  },
+  "scheduler": Object {
+    "initialFormState": Object {
+      "newTaskMessage": "",
+    },
+  },
+}
+`;
