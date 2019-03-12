@@ -56,7 +56,7 @@ const responseDataSuccess = {
 };
 
 const responseDataFail = {
-    message: error,
+    message: errorMessage,
 };
 
 const fetchResponseSuccess = {
@@ -79,6 +79,8 @@ global.__ = {
     tasksList,
     fetchResponseSuccess,
     fetchResponseFail400,
+    responseDataFail,
+    responseDataSuccess,
 };
 global.fetch = fetch;
 global.localStorage = new LocalStorage();
