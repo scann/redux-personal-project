@@ -10,8 +10,9 @@ import { uiActions } from '../../../ui/actions';
 export function* createTask ({ payload: message }) {
     try {
         yield put(uiActions.startSpinning());
+
         const response = yield apply(api, api.tasks.create, [message]);
-        const { data: task, errorMessage } = yield apply(response, response.json);
+        const { data: task, error: errorMessage } = yield apply(response, response.json);
 
         if (response.status !== 200) {
             throw new Error(errorMessage);
