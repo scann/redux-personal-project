@@ -1,0 +1,43 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`fetchTasks saga should handle a 200 status response should dispatch "fillTasks" action 1`] = `
+Object {
+  "@@redux-saga/IO": true,
+  "PUT": Object {
+    "action": Object {
+      "payload": Object {
+        "tasks": Array [
+          Object {
+            "completed": true,
+            "favorite": true,
+            "id": "TEST_ID1",
+            "message": "TEST_MESSAGE1",
+          },
+          Object {
+            "completed": false,
+            "favorite": false,
+            "id": "TEST_ID2",
+            "message": "TEST_MESSAGE2",
+          },
+        ],
+      },
+      "type": "FILL_TASKS",
+    },
+    "channel": null,
+  },
+}
+`;
+
+exports[`fetchTasks saga should handle a 200 status response should dispatch "reset" action 1`] = `
+Object {
+  "@@redux-saga/IO": true,
+  "PUT": Object {
+    "action": Object {
+      "type": "STOP_SPINNING",
+    },
+    "channel": null,
+  },
+}
+`;
+
+exports[`fetchTasks saga should handle a 200 status response should dispatch "stopSpinning" action 1`] = `undefined`;
