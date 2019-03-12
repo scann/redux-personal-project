@@ -20,6 +20,8 @@ const successMessage = 'TEST_SUCCESS_MESSAGE.';
 const errorMessage = 'TEST_ERROR_MESSAGE.';
 const token = 'TEST_TOKEN';
 const error = new Error(errorMessage);
+const emitError = new Error();
+
 const filter = 'FILTER_STRING';
 
 global.localStorage = new LocalStorage();
@@ -48,13 +50,35 @@ const tasksList = {
     ],
 };
 
+const responseDataSuccess = {
+    data:    tasksList,
+    message: successMessage,
+};
+
+const responseDataFail = {
+    message: error,
+};
+
+const fetchResponseSuccess = {
+    status: 200,
+    json:   jest.fn(() => Promise.resolve(responseDataSuccess)),
+};
+
+const fetchResponseFail400 = {
+    status: 400,
+    json:   jest.fn(() => Promise.resolve(responseDataFail)),
+};
+
 global.__ = {
     errorMessage,
     token,
     error,
+    emitError,
     filter,
     testMessage,
     tasksList,
+    fetchResponseSuccess,
+    fetchResponseFail400,
 };
 global.fetch = fetch;
 global.localStorage = new LocalStorage();
