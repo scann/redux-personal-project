@@ -10,10 +10,10 @@ import { updateTask } from '../saga/workers';
 
 describe('updateTask saga:', () => {
     test('should complete a 200 status response scenario', async () => {
-        await expectSaga(updateTask, [__.task])
+        await expectSaga(updateTask, __.task)
             .put(uiActions.startSpinning())
             .provide([[apply(api, api.tasks.update, [__.task]), __.fetchResponseSuccessUp]])
-            //.put(tasksActions.updateTask(__.task.message))
+            //.put(tasksActions.updateTask(__.task))
             .put(uiActions.stopSpinning())
             .run();
     });
@@ -22,7 +22,7 @@ describe('updateTask saga:', () => {
         await expectSaga(updateTask, __.task)
             .put(uiActions.startSpinning())
             .provide([[apply(api, api.tasks.update, [__.task]), __.fetchResponseFail400]])
-            //.provide([[put(uiActions.emitError(__.emitError, 'updateTasks worker')), __.emitError]])
+            //.put(uiActions.emitError(__.emitError, 'updateTasks worker'))
             .put(uiActions.stopSpinning())
             .run();
     });
