@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`removeTask saga should handle a 204 status response should dispatch "removeTask" action 1`] = `
+Object {
+  "@@redux-saga/IO": true,
+  "PUT": Object {
+    "action": Object {
+      "payload": "TEST_ID",
+      "type": "REMOVE_TASK",
+    },
+    "channel": null,
+  },
+}
+`;
+
+exports[`removeTask saga should handle a 204 status response should dispatch "stopSpinning" action 1`] = `
+Object {
+  "@@redux-saga/IO": true,
+  "PUT": Object {
+    "action": Object {
+      "type": "STOP_SPINNING",
+    },
+    "channel": null,
+  },
+}
+`;
