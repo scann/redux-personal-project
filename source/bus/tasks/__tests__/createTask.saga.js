@@ -1,6 +1,6 @@
 //Core
-import { put, apply } from "redux-saga/effects";
-import { cloneableGenerator } from "redux-saga/utils";
+import { put, apply } from 'redux-saga/effects';
+import { cloneableGenerator } from 'redux-saga/utils';
 
 //Instruments
 import { api } from '../../../REST';
