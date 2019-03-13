@@ -1,5 +1,5 @@
 //Core
-import { put, apply, select, call } from 'redux-saga/effects';
+import { put, select, call } from 'redux-saga/effects';
 
 //Instruments
 import { api } from '../../../../REST';
