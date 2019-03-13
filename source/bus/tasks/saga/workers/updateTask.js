@@ -1,5 +1,5 @@
 //Core
-import { put, call, apply } from 'redux-saga/effects';
+import { put, apply } from 'redux-saga/effects';
 
 //Instruments
 import { api } from '../../../../REST';
@@ -10,7 +10,8 @@ export function* updateTask ({ payload: task }) {
     try {
         yield put(uiActions.startSpinning());
         const response = yield apply(api, api.tasks.update, [task]);
-        const { data: [updatedTask], errorMessage } = yield call([response, response.json]);
+
+        const { data: [updatedTask], message: errorMessage } = yield apply(response, response.json);
 
         if (response.status !== 200) {
             throw new Error(errorMessage);
