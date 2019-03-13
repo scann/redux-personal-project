@@ -50,6 +50,7 @@ const tasksList = {
     ],
 };
 
+
 const responseDataSuccess = {
     data:    tasksList,
     message: successMessage,
@@ -69,6 +70,11 @@ const fetchResponseFail400 = {
     json:   jest.fn(() => Promise.resolve(responseDataFail)),
 };
 
+const fetchResponseSuccess204 = {
+    status: 204,
+    json:   jest.fn(() => Promise.resolve(responseDataSuccess)),
+};
+
 global.__ = {
     errorMessage,
     token,
@@ -81,6 +87,7 @@ global.__ = {
     fetchResponseFail400,
     responseDataFail,
     responseDataSuccess,
+    fetchResponseSuccess204,
 };
 global.fetch = fetch;
 global.localStorage = new LocalStorage();
