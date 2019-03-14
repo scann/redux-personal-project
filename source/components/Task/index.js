@@ -49,7 +49,6 @@ export default class Task extends PureComponent {
         const { updateTaskMessage } = this.props;
         const newMessage = event.target.value;
 
-        console.log('newMessage', newMessage);
         if (newMessage.length < 50) {
             updateTaskMessage(newMessage);
         }
@@ -99,8 +98,6 @@ export default class Task extends PureComponent {
         if (isTaskEditing) {
             currentMessage = editTask.get('newMessage');
         }
-
-        console.log('isEditing value', isTaskEditing);
 
         return (
             <li className = { styles }>
