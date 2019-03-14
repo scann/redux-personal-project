@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Form, Control } from 'react-redux-form';
 import FlipMove from 'react-flip-move';
+import _ from 'lodash';
 
 // Instruments
 import Styles from './styles.m.css';
@@ -52,10 +53,19 @@ const mapDispatchToProps = (dispatch) => {
     mapDispatchToProps
 )
 export default class Scheduler extends Component {
+    constructor(props) {
+        super(props);
+        this._updateTasksFilter = _.debounce(this._updateTasksFilter, 500)
+    }
+
     componentDidMount () {
         const { actions } = this.props;
 
         actions.fetchTasksAsync();
+    }
+
+    componentWillUnmount() {
+        this._updateTasksFilter.cancel();
     }
 
     _getAllCompleted = () => this.props.tasks.every((task) => task.get('completed'));
@@ -68,7 +78,7 @@ export default class Scheduler extends Component {
     };
 
     _updateTasksFilter = (event) => {
-        this.props.actions.updateTasksFilter(event.target.value.toLowerCase());
+       this.props.actions.updateTasksFilter(event.toLowerCase());
     };
 
     render () {
@@ -107,7 +117,7 @@ export default class Scheduler extends Component {
                             placeholder = 'Поиск'
                             type = 'search'
                             value = { tasksFilter }
-                            onChange = { this._updateTasksFilter }/>
+                            onChange = { e => this._updateTasksFilter(e.target.value) }/>
                     </header>
                     <section>
                         <Form model = 'form.scheduler' onSubmit = { this._createTask }>
