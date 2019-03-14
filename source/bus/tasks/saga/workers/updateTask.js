@@ -11,13 +11,16 @@ export function* updateTask ({ payload: task }) {
         yield put(uiActions.startSpinning());
         const response = yield apply(api, api.tasks.update, [task]);
 
-        const { data: [updatedTask], message: errorMessage } = yield apply(response, response.json);
+        if (response.status === 200) {
+            const { data: [updatedTask] } = yield apply(response, response.json);
 
-        if (response.status !== 200) {
+            yield put(tasksActions.updateTask(updatedTask));
+        } else {
+            const { message: errorMessage } = yield apply(response, response.json);
+
             throw new Error(errorMessage);
         }
 
-        yield put(tasksActions.updateTask(updatedTask));
     } catch (error) {
         yield put(uiActions.emitError(error, 'updateTask worker'));
     } finally {
