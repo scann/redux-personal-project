@@ -32,12 +32,12 @@ const testMessage = {
     id:      'TEST_ID',
     message: 'TEST_MESSAGE',
 };
-const task = {
+const task = [{
     id:        'TEST_ID',
     message:   'TEST_MESSAGE',
     completed: false,
     favorite:  true,
-};
+}];
 
 const tasksList = {
     tasks: [
@@ -60,11 +60,17 @@ const responseDataSuccess = {
     data:    tasksList,
     message: successMessage,
 };
-const responseDataSuccessUp = {
-    data:    task,
-    message: successMessage,
+const responseDataSuccessUpdate = {
+    data: [
+        task,
+        successMessage
+    ],
 };
 const responseDataFail = {
+    message: errorMessage,
+};
+
+const responseDataFailUp = {
     message: errorMessage,
 };
 
@@ -72,9 +78,9 @@ const fetchResponseSuccess = {
     status: 200,
     json:   jest.fn(() => Promise.resolve(responseDataSuccess)),
 };
-const fetchResponseSuccessUp = {
+const fetchResponseSuccessUpdate = {
     status: 200,
-    json:   jest.fn(() => Promise.resolve(responseDataSuccessUp)),
+    json:   jest.fn(() => Promise.resolve(responseDataSuccessUpdate)),
 };
 const fetchResponseFail400 = {
     status: 400,
@@ -98,9 +104,10 @@ global.__ = {
     fetchResponseSuccess,
     fetchResponseFail400,
     responseDataFail,
+    responseDataFailUp,
     responseDataSuccess,
     fetchResponseSuccess204,
-    fetchResponseSuccessUp,
+    fetchResponseSuccessUpdate,
 };
 global.fetch = fetch;
 global.localStorage = new LocalStorage();
