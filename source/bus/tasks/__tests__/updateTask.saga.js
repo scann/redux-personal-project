@@ -21,8 +21,8 @@ describe('updateTask saga:', () => {
     test('should complete a 400 status response scenario', async () => {
         await expectSaga(updateTask, { payload: __.task })
             .put(uiActions.startSpinning())
-            .provide([[apply(api, api.tasks.update, [__.task]), __.fetchResponseFail400]])
-            .put(uiActions.emitError(__.error, 'updateTask worker'))
+            .provide([[apply(api, api.tasks.update, [__.task]), __.fetchResponseFail400Update]])
+            .put(uiActions.emitError(__.emitError, 'updateTask worker'))
             .put(uiActions.stopSpinning())
             .run();
     });
