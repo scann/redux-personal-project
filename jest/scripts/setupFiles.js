@@ -70,8 +70,11 @@ const responseDataFail = {
     message: errorMessage,
 };
 
-const responseDataFailUp = {
-    message: errorMessage,
+const responseDataFailUpdate = {
+    data: [
+        task,
+        error
+    ],
 };
 
 const fetchResponseSuccess = {
@@ -86,7 +89,10 @@ const fetchResponseFail400 = {
     status: 400,
     json:   jest.fn(() => Promise.resolve(responseDataFail)),
 };
-
+const fetchResponseFail400Update = {
+    status: 400,
+    json:   jest.fn(() => Promise.resolve(responseDataFailUpdate)),
+};
 const fetchResponseSuccess204 = {
     status: 204,
     json:   jest.fn(() => Promise.resolve(responseDataSuccess)),
@@ -103,8 +109,9 @@ global.__ = {
     task,
     fetchResponseSuccess,
     fetchResponseFail400,
+    fetchResponseFail400Update,
     responseDataFail,
-    responseDataFailUp,
+    responseDataFailUpdate,
     responseDataSuccess,
     fetchResponseSuccess204,
     fetchResponseSuccessUpdate,
