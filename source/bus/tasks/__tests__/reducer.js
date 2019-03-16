@@ -32,11 +32,10 @@ describe('tasks reducer', () => {
     });
 
     test('should handle UPDATE_TASK action', () => {
-        expect(tasksReducer(void 0, tasksActions.updateTask(__.testMessage)))
+        expect(tasksReducer(void 0, tasksActions.updateTask(__.task)))
             .toEqual(initialState.update(
-                initialState.findIndex(
-                    (task) => task.get('id').toEqual(__.testMessage.id)),
-                () => fromJS(__.testMessage)));
+                initialState.findIndex((task) => task.get('id') === __.task.id),
+                () => fromJS(__.task)));
     });
 
 });
