@@ -15,6 +15,7 @@
 // Mocks
 import { LocalStorage } from './mocks/localStorage';
 import { fetch } from './mocks/fetch';
+import { fromJS, Map } from 'immutable';
 
 const successMessage = 'TEST_SUCCESS_MESSAGE.';
 const errorMessage = 'TEST_ERROR_MESSAGE.';
@@ -32,12 +33,13 @@ const testMessage = {
     id:      'TEST_ID',
     message: 'TEST_MESSAGE',
 };
-const task = [{
+
+const task = {
     id:        'TEST_ID',
     message:   'TEST_MESSAGE',
     completed: false,
     favorite:  true,
-}];
+};
 
 const tasksList = {
     tasks: [
@@ -55,19 +57,36 @@ const tasksList = {
         }
     ],
 };
+const tasksListCompleted = fromJS(
+
+    Map({
+        id:        'TEST_ID1',
+        message:   'TEST_MESSAGE1',
+        completed: true,
+        favorite:  true,
+    }),
+    Map({
+        id:        'TEST_ID2',
+        message:   'TEST_MESSAGE2',
+        completed: true,
+        favorite:  false,
+    }),
+);
 
 const responseDataSuccess = {
     data:    tasksList,
     message: successMessage,
 };
+
+const responseDataFail = {
+    message: errorMessage,
+};
+
 const responseDataSuccessUpdate = {
     data: [
         task,
         successMessage
     ],
-};
-const responseDataFail = {
-    message: errorMessage,
 };
 
 const responseDataFailUpdate = {
@@ -81,18 +100,22 @@ const fetchResponseSuccess = {
     status: 200,
     json:   jest.fn(() => Promise.resolve(responseDataSuccess)),
 };
+
 const fetchResponseSuccessUpdate = {
     status: 200,
     json:   jest.fn(() => Promise.resolve(responseDataSuccessUpdate)),
 };
+
 const fetchResponseFail400 = {
     status: 400,
     json:   jest.fn(() => Promise.resolve(responseDataFail)),
 };
+
 const fetchResponseFail400Update = {
     status: 400,
     json:   jest.fn(() => Promise.resolve(responseDataFailUpdate)),
 };
+
 const fetchResponseSuccess204 = {
     status: 204,
     json:   jest.fn(() => Promise.resolve(responseDataSuccess)),
@@ -106,6 +129,7 @@ global.__ = {
     filter,
     testMessage,
     tasksList,
+    tasksListCompleted,
     task,
     fetchResponseSuccess,
     fetchResponseFail400,
