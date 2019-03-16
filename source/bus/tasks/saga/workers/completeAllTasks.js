@@ -1,5 +1,5 @@
 //Core
-import { put, select, call } from 'redux-saga/effects';
+import { put, select, call, all } from 'redux-saga/effects';
 
 //Instruments
 import { api } from '../../../../REST';
@@ -10,9 +10,10 @@ export function* completeAllTasks () {
     try {
         yield put(uiActions.startSpinning());
         const tasks = yield select((state) => state.tasks);
-        const completedTasks = tasks.map((task) => task.set('completed', true)).toJS();
 
-        const promises = completedTasks.map((task) => api.tasks.complete(task));
+        const completedTasks = yield all(tasks.map((task) => task.set('completed', true)).toJS());
+        const promises = yield all(completedTasks.map((task) => api.tasks.complete(task)));
+
         const responses = yield call([Promise, Promise.all], promises);
 
         for (const response of responses) {
