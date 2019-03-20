@@ -15,7 +15,10 @@
 // Mocks
 import { LocalStorage } from './mocks/localStorage';
 import { fetch } from './mocks/fetch';
-import { fromJS, Map } from 'immutable';
+import { Map, List } from 'immutable';
+
+// Test utilities
+import { BaseTaskModel } from '../../source/instruments';
 
 const successMessage = 'TEST_SUCCESS_MESSAGE.';
 const errorMessage = 'TEST_ERROR_MESSAGE.';
@@ -42,6 +45,10 @@ const task = {
     favorite:  true,
 };
 
+const tasks = [...Array(10).keys()].map(() => {
+    return new BaseTaskModel();
+});
+
 const tasksList = {
     tasks: [
         {
@@ -58,21 +65,6 @@ const tasksList = {
         }
     ],
 };
-const tasksListCompleted = fromJS(
-
-    Map({
-        id:        'TEST_ID1',
-        message:   'TEST_MESSAGE1',
-        completed: true,
-        favorite:  true,
-    }),
-    Map({
-        id:        'TEST_ID2',
-        message:   'TEST_MESSAGE2',
-        completed: true,
-        favorite:  false,
-    }),
-);
 
 const responseDataSuccess = {
     data:    tasksList,
@@ -130,8 +122,8 @@ global.__ = {
     filter,
     testMessage,
     tasksList,
-    tasksListCompleted,
     task,
+    tasks,
     fetchResponseSuccess,
     fetchResponseFail400,
     fetchResponseFail400Update,
