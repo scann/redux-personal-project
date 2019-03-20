@@ -4,7 +4,7 @@ import { fromJS, List } from 'immutable';
 //Instruments
 import { types } from './types';
 
-export const initialState = List();
+const initialState = List();
 
 export const tasksReducer = (state = initialState, action) => {
     switch (action.type) {
