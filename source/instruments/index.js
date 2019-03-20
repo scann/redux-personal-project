@@ -1,5 +1,6 @@
 export {
     getDisplayName,
     sortTasksByDate,
-    sortTasksByGroup
+    sortTasksByGroup,
+    BaseTaskModel
 } from './helpers';
