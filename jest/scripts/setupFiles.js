@@ -45,10 +45,6 @@ const task = {
     favorite:  true,
 };
 
-const tasks = [...Array(10).keys()].map(() => {
-    return new BaseTaskModel();
-});
-
 const tasksList = {
     tasks: [
         {
@@ -123,7 +119,6 @@ global.__ = {
     testMessage,
     tasksList,
     task,
-    tasks,
     fetchResponseSuccess,
     fetchResponseFail400,
     fetchResponseFail400Update,
