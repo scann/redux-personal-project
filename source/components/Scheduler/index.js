@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Form, Control } from 'react-redux-form';
 import FlipMove from 'react-flip-move';
-import _ from 'lodash';
 
 // Instruments
 import Styles from './styles.m.css';
@@ -53,11 +52,6 @@ const mapDispatchToProps = (dispatch) => {
     mapDispatchToProps
 )
 export default class Scheduler extends Component {
-    constructor(props) {
-        super(props);
-        this._updateTasksFilter = _.debounce(this._updateTasksFilter, 500)
-    }
-
     componentDidMount () {
         const { actions } = this.props;
 
@@ -78,7 +72,7 @@ export default class Scheduler extends Component {
     };
 
     _updateTasksFilter = (event) => {
-       this.props.actions.updateTasksFilter(event.toLowerCase());
+       this.props.actions.updateTasksFilter(event.target.value.toLowerCase());
     };
 
     render () {
@@ -103,7 +97,6 @@ export default class Scheduler extends Component {
                 startEditingTask = { actions.startEditingTask }
                 updateTaskAsync = { actions.updateTaskAsync }
                 updateTaskMessage = { actions.updateTaskMessage }
-                { ...task }
             />
         ));
 
@@ -117,7 +110,7 @@ export default class Scheduler extends Component {
                             placeholder = 'Поиск'
                             type = 'search'
                             value = { tasksFilter }
-                            onChange = { e => this._updateTasksFilter(e.target.value) }/>
+                            onChange = { this._updateTasksFilter }/>
                     </header>
                     <section>
                         <Form model = 'form.scheduler' onSubmit = { this._createTask }>
