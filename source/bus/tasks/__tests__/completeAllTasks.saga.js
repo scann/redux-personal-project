@@ -18,7 +18,7 @@ describe('completeAllTasks saga:', () => {
             .withState(initialState)
             .put(uiActions.startSpinning())
             .provide([
-                [select(tasks), __.tasks]
+                [select(tasks), __.tasksList]
             ])
             //.put(tasksActions.completeAllTasks())
             .put(uiActions.stopSpinning())
