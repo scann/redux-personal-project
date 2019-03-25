@@ -11,7 +11,7 @@ export function* completeAllTasks () {
         yield put(uiActions.startSpinning());
         const tasks = yield select((state) => state.tasks);
 
-        const completedTasks = yield all(tasks.map((task) => task.set('completed', true)).toJS());
+        const completedTasks = tasks.map((task) => task.set('completed', true)).toJS();
         const promises = yield all(completedTasks.map((task) => api.tasks.complete(task)));
 
         const responses = yield call([Promise, Promise.all], promises);
