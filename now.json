@@ -1,1 +1,11 @@
-{}
+{
+  "version": 2,
+  "name": "todo-app-redux",
+  "builds": [
+    { "src": "package.json",
+      "use": "@now/static-build",
+      "config": { "distDir": "build" } }
+  ],
+  "public": true,
+  "alias": ["todo-app-redux.com"]
+}
