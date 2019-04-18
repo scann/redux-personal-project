@@ -23,26 +23,26 @@ const sortedTasks = createSelector(getTasks, (tasks) => sortTasksByGroup(tasks))
 
 const mapStateToProps = (state) => {
     return {
-        tasks: sortedTasks(state),
+        tasks:           sortedTasks(state),
         isTasksFetching: state.ui.get('isTasksFetching'),
-        tasksFilter: state.ui.get('tasksFilter'),
-        editTask: state.ui.get('editTask'),
+        tasksFilter:     state.ui.get('tasksFilter'),
+        editTask:        state.ui.get('editTask'),
     };
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
         actions: bindActionCreators({
-            fetchTasksAsync:        tasksActions.fetchTasksAsync,
-            createTaskAsync:        tasksActions.createTaskAsync,
-            removeTaskAsync:        tasksActions.removeTaskAsync,
-            completeAllTasksAsync:  tasksActions.completeAllTasksAsync,
-            updateTaskAsync:        tasksActions.updateTaskAsync,
-            updateTasksFilter:      uiActions.updateTasksFilter,
-            startEditingTask:       uiActions.startEditingTask,
-            resetEditingTask:       uiActions.resetEditingTask,
-            updateTaskMessage:      uiActions.updateTaskMessage,
-            confirmEditingTask:     uiActions.confirmEditingTask,
+            fetchTasksAsync:       tasksActions.fetchTasksAsync,
+            createTaskAsync:       tasksActions.createTaskAsync,
+            removeTaskAsync:       tasksActions.removeTaskAsync,
+            completeAllTasksAsync: tasksActions.completeAllTasksAsync,
+            updateTaskAsync:       tasksActions.updateTaskAsync,
+            updateTasksFilter:     uiActions.updateTasksFilter,
+            startEditingTask:      uiActions.startEditingTask,
+            resetEditingTask:      uiActions.resetEditingTask,
+            updateTaskMessage:     uiActions.updateTaskMessage,
+            confirmEditingTask:    uiActions.confirmEditingTask,
         }, dispatch),
     };
 };
@@ -51,14 +51,14 @@ const mapDispatchToProps = (dispatch) => {
     mapStateToProps,
     mapDispatchToProps
 )
-export default class Scheduler extends Component {
+class Scheduler extends Component {
     componentDidMount () {
         const { actions } = this.props;
 
         actions.fetchTasksAsync();
     }
 
-    componentWillUnmount() {
+    componentWillUnmount () {
         this._updateTasksFilter.cancel();
     }
 
@@ -72,7 +72,7 @@ export default class Scheduler extends Component {
     };
 
     _updateTasksFilter = (event) => {
-       this.props.actions.updateTasksFilter(event.target.value.toLowerCase());
+        this.props.actions.updateTasksFilter(event.target.value.toLowerCase());
     };
 
     render () {
@@ -84,39 +84,41 @@ export default class Scheduler extends Component {
             .filter((task) =>
                 task.get('message').toLowerCase().includes(tasksFilter))
             .map((task) => (
-            <Task
-                completed = { task.get('completed') }
-                confirmEditingTask = { actions.confirmEditingTask }
-                editTask = { editTask }
-                favorite = { task.get('favorite') }
-                id = { task.get('id') }
-                key = { task.get('id') }
-                message = { task.get('message') }
-                removeTaskAsync = { actions.removeTaskAsync }
-                resetEditingTask = { actions.resetEditingTask }
-                startEditingTask = { actions.startEditingTask }
-                updateTaskAsync = { actions.updateTaskAsync }
-                updateTaskMessage = { actions.updateTaskMessage }
-            />
-        ));
+                <Task
+                    completed = { task.get('completed') }
+                    confirmEditingTask = { actions.confirmEditingTask }
+                    editTask = { editTask }
+                    favorite = { task.get('favorite') }
+                    id = { task.get('id') }
+                    key = { task.get('id') }
+                    message = { task.get('message') }
+                    removeTaskAsync = { actions.removeTaskAsync }
+                    resetEditingTask = { actions.resetEditingTask }
+                    startEditingTask = { actions.startEditingTask }
+                    updateTaskAsync = { actions.updateTaskAsync }
+                    updateTaskMessage = { actions.updateTaskMessage }
+                />
+            ));
 
         return (
             <section className = { Styles.scheduler }>
                 <main>
-                    <Spinner isSpinning = { isTasksFetching }/>
+                    <Spinner isSpinning = { isTasksFetching } />
                     <header>
                         <h1>Планировщик задач</h1>
                         <input
                             placeholder = 'Поиск'
                             type = 'search'
                             value = { tasksFilter }
-                            onChange = { this._updateTasksFilter }/>
+                            onChange = { this._updateTasksFilter }
+                        />
                     </header>
                     <section>
                         <Form model = 'form.scheduler' onSubmit = { this._createTask }>
-                            <Control.text model = 'form.scheduler.newTaskMessage'
+                            <Control.text
                                 className = { Styles.createTask }
                                 maxLength = { 50 }
+                                model = 'form.scheduler.newTaskMessage'
                                 placeholder = 'Описание моей новой задачи'
                                 type = 'text'
                             />
@@ -152,10 +154,11 @@ export default class Scheduler extends Component {
                         </div>
                     </section>
                     <footer>
-                        <Checkbox checked = { allTasksCompleted }
-                                  color1 = '#363636'
-                                  color2 = '#fff'
-                                  onClick = { !allTasksCompleted && actions.completeAllTasksAsync }
+                        <Checkbox
+                            checked = { allTasksCompleted }
+                            color1 = '#363636'
+                            color2 = '#fff'
+                            onClick = { !allTasksCompleted && actions.completeAllTasksAsync }
                         />
                         <span className = { Styles.completeAllTasks }>
                             Все задачи выполнены
@@ -166,3 +169,5 @@ export default class Scheduler extends Component {
         );
     }
 }
+
+export default Scheduler;
